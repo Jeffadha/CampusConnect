@@ -8,6 +8,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="">
+    {{-- trix editor --}}
+    <link rel="stylesheet" type="text/css" href="https://unpkg.com/trix@2.0.0/dist/trix.css">
+    <script type="text/javascript" src="https://unpkg.com/trix@2.0.0/dist/trix.umd.min.js"></script>
 
     <title>@yield('title')</title>
 
@@ -20,6 +23,17 @@
     <!-- Custom styles for this template-->
     <link href="{{ URL::asset('page/css/sb-admin-2.min.css') }}" rel="stylesheet">
 
+    {{-- menghilangkan button file trix editor --}}
+    <style>
+        trix-toolbar .trix-button-group--file-tools {
+            display: none;
+        }
+
+        trix-editor{
+            background-color: #fff;
+            height: 300px;
+        }
+    </style>
 </head>
 
 <body id="page-top">
@@ -51,9 +65,11 @@
             <!-- Divider -->
             <hr class="sidebar-divider">
 
+            @if (Auth()->user()->role == 'admin')
+                
             <!-- Heading -->
             <div class="sidebar-heading">
-                Interface
+                Data
             </div>
 
             <!-- Nav Item - Pages Collapse Menu -->
@@ -67,6 +83,7 @@
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Data Manager :</h6>
                         <a class="collapse-item" href="/admin/users">Users</a>
+                        <a class="collapse-item" href="/admin/pengumuman">Pengumuman</a>
                         <a class="collapse-item" href="cards.html">Cards</a>
                     </div>
                 </div>
@@ -93,12 +110,19 @@
 
             <!-- Divider -->
             <hr class="sidebar-divider">
+            @endif
 
             <!-- Heading -->
             <div class="sidebar-heading">
                 Addons
             </div>
 
+            <li class="nav-item">
+                <a class="nav-link" href="{{ route('pengumuman.list') }}">
+                    <i class="fa fa-list-alt"></i>
+                    <span>Pengumuman</span></a>
+            </li>
+            
             <!-- Nav Item - Pages Collapse Menu -->
             <li class="nav-item">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages"
@@ -121,11 +145,7 @@
             </li>
 
             <!-- Nav Item - Charts -->
-            <li class="nav-item">
-                <a class="nav-link" href="charts.html">
-                    <i class="fas fa-fw fa-chart-area"></i>
-                    <span>Charts</span></a>
-            </li>
+            
 
             <!-- Nav Item - Tables -->
             <li class="nav-item">
@@ -223,7 +243,13 @@
     <!-- Page level custom scripts -->
     <script src="{{ URL::asset('page/js/demo/chart-area-demo.js') }}"></script>
     <script src="{{ URL::asset('page/js/demo/chart-pie-demo.js') }}"></script>
-
+    
+    {{-- non aktif file button trixeditor --}}
+    <script>
+        document.addEventListener('trix-file-accept',function(e){
+            e.preventDefault();
+        })
+    </script>
 </body>
 
 </html>

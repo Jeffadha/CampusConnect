@@ -19,24 +19,25 @@ class AuthController extends Controller
             'password' => 'required'
         ]);
 
-        $credentials = $request->only('email','password');
+        $credentials = $request->only('email', 'password');
 
-        if(Auth::attempt($credentials)){
+        if (Auth::attempt($credentials)) {
             $request->session()->regenerate();
-            if(Auth::user()->role == 'admin'){
-                return redirect('/admin');
-            } elseif(Auth::user()->role == 'dosen'){
-                return redirect('/dosen');
-            } elseif(Auth::user()->role == 'mahasiswa'){
-                return redirect('/mahasiswa');
-            }
+            return redirect('/dashboard');
+            // if (Auth::user()->role == 'admin') {
+            //     return redirect('/admin');
+            // } elseif (Auth::user()->role == 'dosen') {
+            //     return redirect('/dosen');
+            // } elseif (Auth::user()->role == 'mahasiswa') {
+            //     return redirect('/mahasiswa');
+            // }
         }
 
         return back()->withErrors([
             'loginFailed' => 'Email atau password salah'
         ]);
     }
-    
+
     public function logout()
     {
         Auth::logout();
@@ -44,4 +45,3 @@ class AuthController extends Controller
         return redirect('/');
     }
 }
-
