@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\AkademikController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\DosenController;
@@ -30,6 +31,7 @@ Route::get('/logout', [AuthController::class, 'logout']);
 Route::get('/admin', [AdminController::class, 'index'])->middleware('userAccess:admin');
 Route::resource('/admin/users', UserController::class)->middleware('userAccess:admin');
 Route::resource('/admin/pengumuman', PengumumanController::class)->middleware('userAccess:admin');
+Route::resource('/admin/akademik', AkademikController::class)->middleware('userAccess:admin');
 
 //Dosen
 Route::get('/dosen', [DosenController::class, 'index'])->middleware('userAccess:dosen');
@@ -40,6 +42,10 @@ Route::get('/mahasiswa', [MahasiswaController::class, 'index'])->middleware('use
 // pengumuman
 Route::get('/pengumuman', [PengumumanController::class, 'list_pengumuman'])->middleware('auth')->name('pengumuman.list');
 Route::get('/pengumuman/{id}/detail', [PengumumanController::class, 'detail_pengumuman'])->middleware('auth')->name('pengumuman.detail');
+
+// akademik
+Route::get('/akademik', [AkademikController::class, 'list_akademik'])->middleware('auth')->name('akademik.list');
+
 
 // dashboard
 Route::get('/dashboard', [DashboardController::class, 'index'])->middleware('auth');

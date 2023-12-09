@@ -22,6 +22,7 @@
 
     <!-- Custom styles for this template-->
     <link href="{{ URL::asset('page/css/sb-admin-2.min.css') }}" rel="stylesheet">
+    @yield('head')
 
     {{-- menghilangkan button file trix editor --}}
     <style>
@@ -84,6 +85,7 @@
                         <h6 class="collapse-header">Data Manager :</h6>
                         <a class="collapse-item" href="/admin/users">Users</a>
                         <a class="collapse-item" href="/admin/pengumuman">Pengumuman</a>
+                        <a class="collapse-item" href="/admin/akademik">Jadwal Akademik</a>
                         <a class="collapse-item" href="cards.html">Cards</a>
                     </div>
                 </div>
@@ -121,6 +123,11 @@
                 <a class="nav-link" href="{{ route('pengumuman.list') }}">
                     <i class="fa fa-list-alt"></i>
                     <span>Pengumuman</span></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{{ route('akademik.list') }}">
+                    <i class="fa fa-list-alt"></i>
+                    <span>Jadwal Akademik</span></a>
             </li>
             
             <!-- Nav Item - Pages Collapse Menu -->
@@ -250,6 +257,7 @@
             e.preventDefault();
         })
     </script>
+    @yield('script')
 </body>
 
 </html>
