@@ -160,10 +160,11 @@ class TugasController extends Controller
     public function nilai(Request $request)
     {
         foreach ($request->nilai as $nilai => $key) {
-
-            $jawaban = JawabanTugas::find($nilai);
-            $jawaban->nilai = $key;
-            $jawaban->update();
+            if ($key != null) {
+                $jawaban = JawabanTugas::find($nilai);
+                $jawaban->nilai = $key;
+                $jawaban->update();
+            }
         }
 
         return redirect()->back()->with('message', 'nilai berhasil disimpan');
