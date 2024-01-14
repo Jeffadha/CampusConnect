@@ -38,7 +38,7 @@ Route::resource('/admin/akademik', AkademikController::class)->middleware('userA
 Route::get('/dosen', [DosenController::class, 'index'])->middleware('userAccess:dosen');
 Route::get('/list-jawaban/{id_tugas}', [TugasController::class, 'list_jawaban'])->middleware('userAccess:dosen')->name('list.jawaban');
 Route::resource('/dosen/tugas', TugasController::class)->middleware('userAccess:dosen');
-Route::put('/jawaban-nilai/{id}', [TugasController::class, 'nilai'])->name('jawaban.nilai')->middleware('userAccess:dosen');
+Route::put('/jawaban-nilai', [TugasController::class, 'nilai'])->name('jawaban.nilai')->middleware('userAccess:dosen');
 
 //Mahasiswa
 Route::get('/mahasiswa', [MahasiswaController::class, 'index'])->middleware('userAccess:mahasiswa');

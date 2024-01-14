@@ -150,23 +150,22 @@ class TugasController extends Controller
 
     public function list_jawaban($id)
     {
-        $tugas = JawabanTugas::join('users', 'jawaban_tugas.user_id', '=', 'users.id')
+        $tugas = JawabanTugas::leftJoin('users', 'jawaban_tugas.user_id', '=', 'users.id')
             ->where('tugas_id', $id)
+            ->select('jawaban_tugas.*', 'users.name as name')
             ->get();
         return view('dosen.tugas.jawaban', compact('tugas'));
     }
 
-    public function nilai(Request $request, $id)
+    public function nilai(Request $request)
     {
-        $request->validate([
-            "id_$id" => 'required',
-            "nilai_$id" => 'required',
-        ]);
+        foreach ($request->nilai as $nilai => $key) {
 
-        $jawaban = JawabanTugas::find($request->{"id_$id"});
-        dd($jawaban);
-        $jawaban->update(['nilai' => $request->{"nilai_$id"}]);
+            $jawaban = JawabanTugas::find($nilai);
+            $jawaban->nilai = $key;
+            $jawaban->update();
+        }
 
-        return redirect(route('list.jawaban', $jawaban->tugas_id))->with('message', 'nilai berhasil disimpan');
+        return redirect()->back()->with('message', 'nilai berhasil disimpan');
     }
 }

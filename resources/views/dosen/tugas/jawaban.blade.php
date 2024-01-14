@@ -40,6 +40,7 @@
                         @php
                             $i = 1;   
                         @endphp
+                        <form action="{{ route('jawaban.nilai') }}" method="POST">
                         @foreach ($tugas as $jawaban)
                         <tr>
                             {{-- @dd($jawaban) --}}
@@ -60,23 +61,25 @@
                             </td>
                             @endif
                             <td>
-                                <h3>{{ $jawaban->nilai }}</h3>
-                                <form name="{{$jawaban->id}}" action="{{ route('jawaban.nilai',$jawaban->id) }}" method="POST">
+                                
                                     @csrf
                                     @method('PUT')
-                                    <input type="hidden" name="id_{{ $jawaban->id }}" value="{{ $jawaban->id }}">
+                                    <input type="hidden" name="id[{{ $jawaban->id }}]" value="{{ $jawaban->id }}">
                                     @error("id_{{ $jawaban->id }}")
                                         <small style="color:red">{{ $message }}</small>
                                     @enderror
-                                    <input type="text" name="nilai_{{ $jawaban->id }}" class="m-1">
+                                    <h3>{{ $jawaban->nilai }}</h3>
+                                    <input type="text" name="nilai[{{ $jawaban->id }}]" class="m-1">
                                     @error("nilai_{{ $jawaban->id }}")
                                         <small style="color:red">{{ $message }}</small>
                                     @enderror
                                     <button type="submit" class="btn btn-success btn-block">Simpan nilai</button>
-                                <form>
-                            </td>
+                                </td>
+                                {{-- <td><h3>{{ $jawaban->nilai }}</h3></td> --}}
                         </tr>    
+                        
                         @endforeach
+                        <form>
                         
                     </tbody>
                 </table>

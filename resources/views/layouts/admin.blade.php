@@ -180,7 +180,8 @@
     <!-- Page level custom scripts -->
     <script src="{{ URL::asset('page/js/demo/chart-area-demo.js') }}"></script>
     <script src="{{ URL::asset('page/js/demo/chart-pie-demo.js') }}"></script>
-    
+    {{-- jquery --}}
+    <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
     {{-- non aktif file button trixeditor --}}
     <script>
         document.addEventListener('trix-file-accept',function(e){
