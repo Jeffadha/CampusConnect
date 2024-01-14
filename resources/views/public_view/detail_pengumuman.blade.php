@@ -18,7 +18,7 @@
             <center>
 
                 <h2>{{ $pengumuman->judul }}</h2>
-                <img class="my-5" src="/image_pengumuman/{{ $pengumuman->gambar }}" alt="image">
+                <img style="width: 100%;" class="my-5" src="/image_pengumuman/{{ $pengumuman->gambar }}" alt="image">
             </center>
                 <div class="mx-3">
                     {!! $pengumuman->deskripsi !!}
